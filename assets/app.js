@@ -12,16 +12,20 @@ function quote(plan, R, S, billing, mode, site) {
   const ownPct = site.own_pct ?? 2.9;
   const ownFixed = site.own_fixed_cents ?? 30;
   const N = R / S;
-  const price = billing === 'annual' ? plan.price_annual_mo : plan.price_monthly;
+  let price = billing === 'annual' ? plan.price_annual_mo : plan.price_monthly;
   const reasons = [];
   const flags = [];
+  if (billing === 'annual' && price == null && plan.price_monthly != null) {
+    price = plan.price_monthly;
+    flags.push('no annual billing; monthly price used');
+  }
   if (price == null) reasons.push('contact sales / price unavailable');
   if (mode === 'own' && plan.own_processor_surcharge_pct == null) {
     reasons.push('own-gateway not stated by vendor');
   }
   const baseline_processing = R * 2.9 / 100 + N * 0.30;
   const subscription = price == null ? null : 12 * price;
-  const platform_fee = R * plan.platform_fee_pct / 100;
+  const platform_fee = R * plan.platform_fee_pct / 100 + N * (plan.platform_fee_fixed_cents ?? 0) / 100;
   let processing;
   let gateway_surcharge;
   if (mode === 'native') {
