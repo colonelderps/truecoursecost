@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare annual course platform subscriptions, payment processing and selling fees in USD.">
+  <title>TrueCourseCost — Course platform fee calculator</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/fees-data.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap head"><a class="brand" href="index.html" data-site-name>TrueCourseCost</a><nav aria-label="Main"><a href="#calculator">Calculator</a><a href="methodology.html">Methodology</a><a href="fee-changelog.html">Fee changelog</a></nav></div></header>
+<main id="main" class="wrap">
+  <div class="hero"><p class="eyebrow">Independent estimates · USD</p><h1>What does selling your course really cost?</h1><p>Compare subscriptions, platform fees and payment processing. Find the cheapest modeled plan for each platform at your revenue.</p></div>
+  <section class="card" id="calculator" aria-labelledby="input-heading">
+    <h2 id="input-heading">Your course business</h2>
+    <form id="calculator-form">
+      <div class="inputs">
+        <div class="revenue-control"><label for="revenue">Annual revenue (USD)</label><input id="revenue" name="revenue" type="number" min="1000" max="1000000" step="any" value="25000" required aria-describedby="revenue-help"><p class="muted" id="revenue-help">From $1,000 to $1,000,000 per year.</p><label class="sr-only" for="revenue-slider">Annual revenue slider (USD)</label><input id="revenue-slider" type="range" min="1000" max="1000000" step="1" value="25000"><div class="presets" aria-label="Revenue presets"><button type="button" data-revenue="5000">$5k</button><button type="button" data-revenue="25000">$25k</button><button type="button" data-revenue="100000">$100k</button><button type="button" data-revenue="500000">$500k</button></div></div>
+        <div><label for="sale">Average sale price (USD)</label><input id="sale" name="sale" type="number" min="0.01" step="any" value="100" required><p id="sales-count" class="muted"></p></div>
+        <div><label for="billing">Subscription billing</label><select id="billing" name="billing"><option value="annual">Annual billing</option><option value="monthly">Monthly billing</option></select><p class="muted">All results are annual totals.</p></div>
+        <div><label for="mode">Payment processor</label><select id="mode" name="mode"><option value="native">Platform-native / integrated</option><option value="own">My own Stripe / PayPal</option></select><p id="processor-help" class="muted"></p></div>
+      </div>
+      <p id="input-error" class="error" role="alert"></p>
+      <div class="share"><button type="button" id="share">Copy shareable URL</button><span id="share-status" role="status"></span></div>
+      <label for="share-url">Link to these inputs</label><input id="share-url" type="text" readonly>
+    </form>
+  </section>
+  <section aria-labelledby="results-heading" id="results-section">
+    <h2 id="results-heading">Estimated annual costs</h2>
+    <p class="disclosure">No affiliate links: every vendor link goes straight to the platform's own pricing page. <a href="disclosure.html">Affiliate disclosure</a>.</p>
+    <p class="notice">Fees change; confirm on the vendor's pricing page before buying.</p>
+    <p>Effective take is the cost above plain card processing, as a percentage of revenue. Total includes all modeled processing. Product limits, taxes, refunds and feature requirements are not modeled.</p>
+    <p id="result-summary" role="status" aria-live="polite"></p>
+    <div id="ranked-results"></div>
+    <details class="card"><summary>All plans and fee details</summary><div id="all-plans"></div></details>
+    <section class="card" aria-labelledby="excluded-heading"><h3 id="excluded-heading">Excluded from ranking</h3><div id="excluded-plans"></div></section>
+    <section class="card" aria-labelledby="break-heading"><h3 id="break-heading">When does the next plan pay off?</h3><p class="muted">Same average sale price, billing and processor; equality at the threshold, savings above it.</p><div id="break-even"></div></section>
+  </section>
+  <noscript><p class="notice">Enable JavaScript to use the calculator. Visit the pricing pages below for fee data.</p></noscript>
+  <section class="card"><h2>Explore platform fees</h2><nav class="page-links" aria-label="Platform pricing"><a href="thinkific-pricing.html">Thinkific pricing</a><a href="teachable-pricing.html">Teachable pricing</a><a href="kajabi-pricing.html">Kajabi pricing</a><a href="podia-pricing.html">Podia pricing</a><a href="kit-commerce-fees.html">Kit Commerce fees</a></nav></section>
+</main>
+<footer><div class="wrap"><strong data-site-name>TrueCourseCost</strong><p>Compare the costs. Check the source.</p><nav aria-label="Footer"><a href="fee-changelog.html">Fee changelog</a><a href="methodology.html">Methodology</a><a href="disclosure.html">Disclosure</a><a href="about.html">About</a></nav></div></footer>
+</body>
+</html>
