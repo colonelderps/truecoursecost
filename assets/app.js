@@ -51,7 +51,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     if (!$('calculator-form')) return;
     const fees = window.FEES || [];
     const site = window.SITE || {};
-    const names = { thinkific: 'Thinkific', teachable: 'Teachable', kajabi: 'Kajabi', podia: 'Podia', kit: 'Kit' };
+    const names = { thinkific: 'Thinkific', teachable: 'Teachable', kajabi: 'Kajabi', podia: 'Podia', kit: 'Kit', learnworlds: 'LearnWorlds', skool: 'Skool', stan: 'Stan Store', gumroad: 'Gumroad', payhip: 'Payhip', systeme: 'Systeme.io' };
     const money = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(value);
     const number = value => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
     const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -80,7 +80,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     }
     function table(rows, caption) {
       if (!rows.length) return '<p>No plans can be ranked with these inputs.</p>';
-      return `<div class="table-scroll" role="region" tabindex="0" aria-label="${esc(caption)}"><table><caption>${esc(caption)} — USD per year</caption><thead><tr><th scope="col">Platform / plan</th><th scope="col">Subscription</th><th scope="col">Platform fee</th><th scope="col">Processing</th><th scope="col">Gateway surcharge</th><th scope="col">Total / yr</th><th scope="col">Effective take</th><th scope="col">Confidence / last verified</th></tr></thead><tbody>${rows.map(({ plan: p, cost: c }) => `<tr><th scope="row">${esc(label(p))}<small class="block">Eligible</small><small class="block">${source(p)}</small>${c.flags.map(f => `<small class="warning block">${esc(f)}</small>`).join('')}</th><td>${money(c.subscription)}</td><td>${money(c.platform_fee)}<small class="block">${number(p.platform_fee_pct)}% of revenue</small></td><td>${money(c.processing)}</td><td>${money(c.gateway_surcharge)}</td><td class="total">${money(c.total)}</td><td>${number(c.effective_take_pct)}%</td><td>${evidence(p)}</td></tr>`).join('')}</tbody></table></div>`;
+      return `<div class="table-scroll" role="region" tabindex="0" aria-label="${esc(caption)}"><table><caption>${esc(caption)} — USD per year</caption><thead><tr><th scope="col">Platform / plan</th><th scope="col">Subscription</th><th scope="col">Platform fee</th><th scope="col">Processing</th><th scope="col">Gateway surcharge</th><th scope="col">Total / yr</th><th scope="col">Effective take</th><th scope="col">Confidence / last verified</th></tr></thead><tbody>${rows.map(({ plan: p, cost: c }) => `<tr><th scope="row">${esc(label(p))}<small class="block">Eligible</small>${p.limits ? `<small class="warning block">Limits: ${esc(p.limits)}</small>` : ''}<small class="block">${source(p)}</small>${c.flags.map(f => `<small class="warning block">${esc(f)}</small>`).join('')}</th><td>${money(c.subscription)}</td><td>${money(c.platform_fee)}<small class="block">${number(p.platform_fee_pct)}% of revenue</small></td><td>${money(c.processing)}</td><td>${money(c.gateway_surcharge)}</td><td class="total">${money(c.total)}</td><td>${number(c.effective_take_pct)}%</td><td>${evidence(p)}</td></tr>`).join('')}</tbody></table></div>`;
     }
     function updateURL(R, S, billing, mode) {
       const url = new URL(window.location.href);
